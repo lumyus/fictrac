@@ -98,6 +98,9 @@ elseif(BASLER_USB3)
     endif()
 endif()
 
+# ZeroMQ dependencies
+find_package(cppzmq)
+
 # add include dirs
 include_directories(${PROJECT_SOURCE_DIR}/include ${OpenCV_INCLUDE_DIRS} ${NLopt_INCLUDE_DIRS})
 if(PGR_USB2 OR PGR_USB3)
@@ -144,7 +147,7 @@ else()  # gcc
 endif()
 
 # linking
-target_link_libraries(fictrac_core PUBLIC ${OpenCV_LIBS} ${NLOPT_LIBRARIES})
+target_link_libraries(fictrac_core PUBLIC ${OpenCV_LIBS} ${NLOPT_LIBRARIES} cppzmq)
 if(MSVC)
     target_link_libraries(fictrac_core PUBLIC Ws2_32)
 else()  # gcc
